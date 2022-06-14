@@ -119,8 +119,8 @@ export default function Home({ blogs }) {
 
               <li className="group pl-6">
 
-                <span
-                  className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Services</span>
+                <a href='#services'><span
+                  className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Services</span></a>
 
                 <span className="block h-0.5 w-full bg-transparent group-hover:bg-yellow"></span>
               </li>
@@ -167,8 +167,8 @@ export default function Home({ blogs }) {
 
               <li className="group pl-6">
 
-                <span
-                  className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Contact</span>
+              <a href='#contact'><span
+                  className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Contact</span></a>
 
                 <span className="block h-0.5 w-full bg-transparent group-hover:bg-yellow"></span>
               </li>
@@ -944,7 +944,7 @@ export async function getServerSideProps(context) {
     dataset: "production",
     useCdn: false
   });
-  const query = `*[_type == "blog"]`;
+  const query = `*[_type == "blog"][0...3]`; // For appearance of 0 to 3 blogs only
   const blogs = await client.fetch(query);
   console.log(blogs.length);
   return {
