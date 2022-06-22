@@ -10,22 +10,22 @@ import { useEffect } from 'react';
 import imageUrlBuilder from '@sanity/image-url'
 import Link from 'next/link'
 import Navbar from '../components/Navbar';
-const Blogs = ({blogs}) => {
+const Blogs = ({ blogs }) => {
     const client = createClient({
         projectId: "wy81on46",
         dataset: "production",
         useCdn: false
-      });
-      const builder = imageUrlBuilder(client)
-    
-      useEffect(() => {
+    });
+    const builder = imageUrlBuilder(client)
+
+    useEffect(() => {
         // console.log(builder.image(blogs[0].blogimg).width(200).url());
         // console.log(builder.image(blogs[1].blogimg).width(200).url());
         console.log("We did it");
-      }, [])
+    }, [])
     return (
         <div>
-        <Navbar/>
+            <Navbar />
             <div className="bg-grey-50 my-12" id="blog">
                 <div className="container mx-auto py-16 md:py-20">
                     <h2 className="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl">
@@ -64,17 +64,17 @@ const Blogs = ({blogs}) => {
 export default Blogs
 export async function getServerSideProps(context) {
     const client = createClient({
-      projectId: "wy81on46",
-      dataset: "production",
-      useCdn: false
+        projectId: "wy81on46",
+        dataset: "production",
+        useCdn: false
     });
     const query = `*[_type == "blog"]`;
     const blogs = await client.fetch(query);
     console.log(blogs.length);
     return {
-      props: {
-        blogs
-      }
+        props: {
+            blogs
+        }
     }
-  }
-  
+}
+

@@ -6,17 +6,27 @@ import styles from '../styles/Home.module.css'
 import { createClient } from "next-sanity";
 import PortableText from "react-portable-text"
 import Script from "next/script"
-import { useEffect } from 'react';
+import { Profiler, useEffect } from 'react';
 import imageUrlBuilder from '@sanity/image-url'
 import Link from 'next/link'
 
-export default function Home({ blogs }) {
+export default function Home({ blogs, profile }) {
   const client = createClient({
     projectId: "wy81on46",
     dataset: "production",
     useCdn: false
   });
-  const builder = imageUrlBuilder(client)
+  const builder = imageUrlBuilder(client);
+  // const profile = {
+  //   title: "BlogsWithPraj",
+  //   name: "Prajwal Urkude",
+  //   age: 20,
+  //   image: "/assets/img/blog-author.jpg",
+  //   fbLink: "https://www.facebook.com/photo/?fbid=1066475793883895&set=gm.1277505052708415",
+  //   twitterLink: "https://twitter.com/?lang=en-in",
+  //   linkedin: "https://www.linkedin.com/in/prajwal-urkude-8a1b6818b/",
+  //   instaLink: "https://www.instagram.com/praj_in_metaverse/",
+  // }
 
   useEffect(() => {
     // console.log(builder.image(blogs[0].blogimg).width(200).url());
@@ -36,7 +46,7 @@ export default function Home({ blogs }) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
           name="viewport" />
 
-        <title>Homepage | Atom Template</title>
+        <title>{profile.title} - Developer | Coder | Tech Geek</title>
 
         <meta property="og:title" content="Homepage | Atom Template" />
 
@@ -103,7 +113,7 @@ export default function Home({ blogs }) {
         <div className="container flex items-center justify-between">
           <div>
             <a href="/">
-              <img src="/assets/img/logo.svg" className="w-24 lg:w-48" alt="logo image" />
+              <h2 className='text-white text-2xl font-bold'>{profile.title}</h2>
             </a>
           </div>
           <div className="hidden lg:block">
@@ -167,7 +177,7 @@ export default function Home({ blogs }) {
 
               <li className="group pl-6">
 
-              <a href='#contact'><span
+                <a href='#contact'><span
                   className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Contact</span></a>
 
                 <span className="block h-0.5 w-full bg-transparent group-hover:bg-yellow"></span>
@@ -258,11 +268,11 @@ export default function Home({ blogs }) {
         <div className="container relative z-30 pt-20 pb-12 sm:pt-56 sm:pb-48 lg:pt-64 lg:pb-48">
           <div className="flex flex-col items-center justify-center lg:flex-row">
             <div className="rounded-full border-8 border-primary shadow-xl">
-              <img src="/assets/img/blog-author.jpg" className="h-48 rounded-full sm:h-56" alt="author" />
+              <img src={builder.image(profile.image).width(200).url()} className="h-48 rounded-full sm:h-56" alt="author" />
             </div>
             <div className="pt-8 sm:pt-10 lg:pl-8 lg:pt-0">
               <h1 className="text-center font-header text-4xl text-white sm:text-left sm:text-5xl md:text-6xl">
-                Hello I'm Prajwal Urkude!
+                Hello I'm {profile.name}!
               </h1>
               <div className="flex flex-col justify-center pt-3 sm:flex-row sm:pt-5 lg:justify-start">
                 <div className="flex items-center justify-center pl-0 sm:justify-start md:pl-1">
@@ -272,19 +282,19 @@ export default function Home({ blogs }) {
                   </div>
                 </div>
                 <div className="flex items-center justify-center pt-5 pl-2 sm:justify-start sm:pt-0">
-                  <a href="/">
+                  <a href={profile.fbLink} target="_blank">
                     <i className="bx bxl-facebook-square text-2xl text-white hover:text-yellow"></i>
                   </a>
-                  <a href="/" className="pl-4">
+                  <a href={profile.twitterLink} className="pl-4" target="_blank">
                     <i className="bx bxl-twitter text-2xl text-white hover:text-yellow"></i>
                   </a>
-                  <a href="/" className="pl-4">
+                  <a href="/" className="pl-4" target="_blank">
                     <i className="bx bxl-dribbble text-2xl text-white hover:text-yellow"></i>
                   </a>
-                  <a href="/" className="pl-4">
+                  <a href={profile.linkedin} className="pl-4" target="_blank">
                     <i className="bx bxl-linkedin text-2xl text-white hover:text-yellow"></i>
                   </a>
-                  <a href="/" className="pl-4">
+                  <a href={profile.instaLink} className="pl-4" target="_blank">
                     <i className="bx bxl-instagram text-2xl text-white hover:text-yellow"></i>
                   </a>
                 </div>
@@ -301,7 +311,7 @@ export default function Home({ blogs }) {
               Who am I?
             </h2>
             <h4 className="pt-6 font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl">
-              I'm Prajwal Urkude, a Web Designer & Photographer
+              I'm {profile.name}, a Web Designer & Photographer
             </h4>
             <p className="pt-6 font-body leading-relaxed text-grey-20">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -346,10 +356,10 @@ export default function Home({ blogs }) {
                 <h4 className="font-body font-semibold uppercase text-black">
                   HTML & CSS
                 </h4>
-                <h3 className="font-body text-3xl font-bold text-primary">85%</h3>
+                <h3 className="font-body text-3xl font-bold text-primary">67%</h3>
               </div>
               <div className="mt-2 h-3 w-full rounded-full bg-lila">
-                <div className="h-3 rounded-full bg-primary" style={{ "width": "85%" }}></div>
+                <div className="h-3 rounded-full bg-primary" style={{ "width": "67%" }}></div>
               </div>
             </div>
             <div className="pt-6">
@@ -899,19 +909,19 @@ export default function Home({ blogs }) {
               © Copyright 2022. All right reserved, ATOM.
             </p>
             <div className="flex items-center justify-center pt-5 sm:justify-start sm:pt-0">
-              <a href="/">
+              <a href={profile.fbLink}>
                 <i className="bx bxl-facebook-square text-2xl text-white hover:text-yellow"></i>
               </a>
-              <a href="/" className="pl-4">
+              <a href={profile.twitterLink} className="pl-4">
                 <i className="bx bxl-twitter text-2xl text-white hover:text-yellow"></i>
               </a>
               <a href="/" className="pl-4">
                 <i className="bx bxl-dribbble text-2xl text-white hover:text-yellow"></i>
               </a>
-              <a href="/" className="pl-4">
+              <a href={profile.linkedin} className="pl-4">
                 <i className="bx bxl-linkedin text-2xl text-white hover:text-yellow"></i>
               </a>
-              <a href="/" className="pl-4">
+              <a href={profile.instaLink} className="pl-4">
                 <i className="bx bxl-instagram text-2xl text-white hover:text-yellow"></i>
               </a>
             </div>
@@ -946,10 +956,13 @@ export async function getServerSideProps(context) {
   });
   const query = `*[_type == "blog"][0...3]`; // For appearance of 0 to 3 blogs only
   const blogs = await client.fetch(query);
+
+  const profileQuery = `*[_type == "profile"][0]`; // For appearance of 0 to 3 blogs only
+  const profile = await client.fetch(profileQuery);
   console.log(blogs.length);
   return {
     props: {
-      blogs
+      blogs, profile
     }
   }
 }
