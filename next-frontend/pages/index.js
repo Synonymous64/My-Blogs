@@ -1,4 +1,3 @@
-
 import Head from 'next/head'
 // import Image from 'next/image'
 import image from 'next/image'
@@ -9,6 +8,7 @@ import Script from "next/script"
 import { Profiler, useEffect } from 'react';
 import imageUrlBuilder from '@sanity/image-url'
 import Link from 'next/link'
+import Navbar from '../components/Navbar';
 
 export default function Home({ blogs, profile }) {
   const client = createClient({
@@ -28,11 +28,11 @@ export default function Home({ blogs, profile }) {
   //   instaLink: "https://www.instagram.com/praj_in_metaverse/",
   // }
 
-  useEffect(() => {
-    // console.log(builder.image(blogs[0].blogimg).width(200).url());
-    // console.log(builder.image(blogs[1].blogimg).width(200).url());
-    console.log("We did it");
-  }, [])
+  // useEffect(() => {
+  //   // console.log(builder.image(blogs[0].blogimg).width(200).url());
+  //   // console.log(builder.image(blogs[1].blogimg).width(200).url());
+  //   // console.log("We did it");
+  // }, [])
 
   return (
     <><>
@@ -109,7 +109,7 @@ export default function Home({ blogs, profile }) {
 
 
       </Head>
-      <div className="w-full z-50 top-0 py-3 sm:py-5  absolute ">
+      {/* <div className="w-full z-50 top-0 py-3 sm:py-5  absolute ">
         <div className="container flex items-center justify-between">
           <div>
             <a href="/">
@@ -191,7 +191,8 @@ export default function Home({ blogs, profile }) {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
+      <Navbar profile={profile}/>
       <div
         className="pointer-events-none fixed inset-0 z-70 min-h-screen bg-black bg-opacity-70 opacity-0 transition-opacity lg:hidden" />
       <div className="hidden absolute right-0 min-h-screen w-2/3 bg-primary py-4 px-8 shadow md:w-1/3">
@@ -959,7 +960,6 @@ export async function getServerSideProps(context) {
 
   const profileQuery = `*[_type == "profile"][0]`; // For appearance of 0 to 3 blogs only
   const profile = await client.fetch(profileQuery);
-  console.log(blogs.length);
   return {
     props: {
       blogs, profile

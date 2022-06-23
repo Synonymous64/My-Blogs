@@ -4,7 +4,7 @@ import { createClient } from "next-sanity";
 import PortableText from "react-portable-text"
 import Navbar from '../../components/Navbar';
 
-const Post = ({ blog }) => {
+const Post = ({ blog, profile }) => {
     const router = useRouter()
     const { slug } = router.query
 
@@ -100,7 +100,7 @@ const Post = ({ blog }) => {
 
 
         </Head>
-        <Navbar/>
+        <Navbar profile ={profile}/>
 
 
             <div><div class="container py-6 md:py-10">
@@ -255,10 +255,12 @@ export const getServerSideProps = async (context) => {
     });
     const query = `*[_type == "blog" && slug.current == '${slug}'][0]`;
     const blog = await client.fetch(query);
+    const profileQuery = `*[_type == "profile"][0]`; // For appearance of 0 to 3 blogs only
+    const profile = await client.fetch(profileQuery);
     {/* console.log(blog); */ }
     return {
         props: {
-            blog
+            blog, profile
         }
     }
 }

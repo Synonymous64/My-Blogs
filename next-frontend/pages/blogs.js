@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-// import Image from 'next/image'
+import Image from 'next/image'
 import image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { createClient } from "next-sanity";
@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import imageUrlBuilder from '@sanity/image-url'
 import Link from 'next/link'
 import Navbar from '../components/Navbar';
-const Blogs = ({ blogs }) => {
+const Blogs = ({ blogs, profile }) => {
     const client = createClient({
         projectId: "wy81on46",
         dataset: "production",
@@ -25,7 +25,7 @@ const Blogs = ({ blogs }) => {
     }, [])
     return (
         <div>
-            <Navbar />
+            <Navbar profile={profile} />
             <div className="bg-grey-50 my-12" id="blog">
                 <div className="container mx-auto py-16 md:py-20">
                     <h2 className="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl">
@@ -70,10 +70,12 @@ export async function getServerSideProps(context) {
     });
     const query = `*[_type == "blog"]`;
     const blogs = await client.fetch(query);
-    console.log(blogs.length);
+    const profileQuery = `*[_type == "profile"][0]`; // For appearance of 0 to 3 blogs only
+    const profile = await client.fetch(profileQuery);
+    // console.log(blogs.length);
     return {
         props: {
-            blogs
+            blogs, profile
         }
     }
 }
