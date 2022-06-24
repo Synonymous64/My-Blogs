@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { createClient } from "next-sanity";
 import PortableText from "react-portable-text"
 import Navbar from '../../components/Navbar';
+import author from '../../../Sanity-Backend/schemas/author';
 
 const Post = ({ blog, profile }) => {
     const router = useRouter()
@@ -121,7 +122,7 @@ const Post = ({ blog, profile }) => {
                             </div>
                             <div class="pl-5">
                                 <span class="block font-body text-xl font-bold text-grey-10"
-                                >By Christy Smith</span
+                                >{profile.name}</span
                                 >
                                 <span class="block pt-1 font-body text-xl font-bold text-grey-30"
                                 >February 27, 2022</span
@@ -171,7 +172,7 @@ const Post = ({ blog, profile }) => {
                         </div>
                         <div class="ml-0 text-center md:ml-10 md:w-5/6 md:text-left">
                             <h3 class="pt-10 font-body text-2xl font-bold text-secondary md:pt-0">
-                                Christy Smith
+                                {author.name}
                             </h3>
                             <p
                                 class="pt-5 font-body text-lg leading-8 text-secondary sm:leading-9 md:text-xl md:leading-9 lg:leading-9 xl:leading-9"
